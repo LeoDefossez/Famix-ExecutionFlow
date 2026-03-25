@@ -1,10 +1,11 @@
 Class {
-	#name : #BaselineOfFamixExecutionFlow,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfFamixExecutionFlow
+	#name : 'BaselineOfFamixExecutionFlow',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfFamixExecutionFlow',
+	#package : 'BaselineOfFamixExecutionFlow'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamixExecutionFlow >> baseline: spec [
 
 	<baseline>
@@ -13,16 +14,20 @@ BaselineOfFamixExecutionFlow >> baseline: spec [
 		self packages: spec ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamixExecutionFlow >> dependencies: spec [
 
 	spec
 		baseline: 'FamixValue'
 		with: [
-		spec repository: 'github://moosetechnology/Famix-Value:main/src' ]
+		spec repository: 'github://moosetechnology/Famix-Value:main/src' ].
+	spec
+		baseline: 'FamixBridge'
+		with: [
+		spec repository: 'github://moosetechnology/Famix-Bridge:main/src' ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamixExecutionFlow >> packages: spec [
 
 	spec
