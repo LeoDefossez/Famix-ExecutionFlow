@@ -28,7 +28,7 @@ FamixExecutionFlowImporterBridge class >> resources [
 { #category : 'accessing' }
 FamixExecutionFlowImporterBridge class >> sources [
 
-	^ self resources / 'sources' / 'JTE'
+	^ self resources / 'sources' / 'JTE' / 'traces'
 ]
 
 { #category : 'see class side' }

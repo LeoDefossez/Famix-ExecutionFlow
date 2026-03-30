@@ -39,6 +39,47 @@ FamixExecutionFlowJavaJTEImporterTest >> testCreateMethodCallEmpty [
 ]
 
 { #category : 'tests' }
+FamixExecutionFlowJavaJTEImporterTest >> testCreateMethodCallOneArgument [
+
+	| result |
+	result := importer createMethodCall:
+		          (self sourceResources emptyMethodCall
+			           at: #arguments
+			           put: self sourceResources simpleArguments;
+			           yourself).
+
+	"Should only be indirect method call for now"
+	self assert: result class equals: FamixEFIndirectMethodCall.
+	self assert: result arguments size equals: 1
+]
+
+{ #category : 'tests' }
+FamixExecutionFlowJavaJTEImporterTest >> testCreateMethodCallWithReceiver [
+
+	| result |
+	result := importer createMethodCall:
+		          (self sourceResources emptyMethodCall
+			           at: #receiver put: self sourceResources simpleReceiver;
+			           yourself).
+
+	"Should only be indirect method call for now"
+	self assert: result class equals: FamixEFIndirectMethodCall.
+	self assert: result receiver notNil
+]
+
+{ #category : 'tests' }
+FamixExecutionFlowJavaJTEImporterTest >> testImportIsBasicTrace [
+	"Smoke test, we just want to make sure no error happen"
+
+	| result |
+	result := FamixExecutionFlowJavaJTEImporter import:
+		          self sourceResources basicTrace.
+
+	self assert: result class equals: FamixEFModel.
+	self assert: result entities notEmpty
+]
+
+{ #category : 'tests' }
 FamixExecutionFlowJavaJTEImporterTest >> testImportIsOk [
 
 	| result |
