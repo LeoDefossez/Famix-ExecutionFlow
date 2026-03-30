@@ -22,7 +22,7 @@ FamixExecutionFlowJavaJTEImporter class >> initialize [
 
 { #category : 'as yet unclassified' }
 FamixExecutionFlowJavaJTEImporter class >> registerExternalDropHandler [
-	ExternalDropHandler registerHandler: (ExternalDropHandler type: nil extension: #tr action: [ :fileReference |
+	ExternalDropHandler registerHandler: (ExternalDropHandler type: nil extension: #ef action: [ :fileReference |
 				 (self import: fileReference)
 					 install;
 					 inspect ])
@@ -199,15 +199,18 @@ FamixExecutionFlowJavaJTEImporter >> createValueFrom: aDictionary [
 	"Choose which subTypes of a Value should be instantiated"
 
 	"Looking for either a reference or a primitive type, if neither are present throw an error"
+	
+	aDictionary ifNil:[^ self nilValue ].
 
 	aDictionary
 		at: #reference
-		ifPresent: [ :reference | ^ self createRecursiveValueFrom: reference ].
-		
+		ifPresent: [ :reference |
+		^ self createRecursiveValueFrom: reference ].
+
 	aDictionary
 		at: #primitiveValue
 		ifPresent: [ :primitive | ^ self createPrimitiveValue: primitive ].
-		
+
 	Error signal: 'Unexcepted argument value'
 ]
 
@@ -406,6 +409,28 @@ FamixExecutionFlowJavaJTEImporter >> instantiateReferenceEntityFrom: aDictionary
 
 	refered isString ifTrue: [ ^ FamixValueOfPrimitiveType new ].
 	Error signal: 'Should either be String or dictionary'
+]
+
+{ #category : 'meta-object-protocol' }
+FamixExecutionFlowJavaJTEImporter >> nilType [
+	"Instantiate a PrimitiveType if not already on the model"
+
+	| name |
+	name := 'null'.
+	^ createdTypes at: 'null' ifAbsentPut: [
+		  (FamixJavaPrimitiveType named: name)
+			  isStub: true;
+			  yourself ]
+]
+
+{ #category : 'meta-object-protocol' }
+FamixExecutionFlowJavaJTEImporter >> nilValue [
+
+	| primVal |
+	primVal := model add: FamixValueOfPrimitiveType new.
+	self createTypingFor: primVal with: self nilType.
+	primVal value: nil.
+	^ primVal
 ]
 
 { #category : 'meta-object-protocol' }
