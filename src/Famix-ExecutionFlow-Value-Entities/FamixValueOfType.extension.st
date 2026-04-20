@@ -8,14 +8,14 @@ FamixValueOfType >> argumentInMethodCall [
 	<FMComment: 'The calls that use me as an argument.'>
 	<FMProperty: #argumentInMethodCall type: #FamixEFMethodCall opposite: #arguments>
 	<package: #'Famix-ExecutionFlow-Value-Entities'>
-	^ self attributeAt: #argumentInMethodCall ifAbsent: [ nil ]
+	^ self attributeAt: #argumentInMethodCall ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #arguments ]
 ]
 
 { #category : '*Famix-ExecutionFlow-Value-Entities-accessing' }
 FamixValueOfType >> argumentInMethodCall: anObject [
 
 	<generated>
-	self attributeAt: #argumentInMethodCall put: (FMMultivalueLink on: self update: #arguments from: self argumentInMethodCall to: anObject).
+	self argumentInMethodCall value: anObject
 ]
 
 { #category : '*Famix-ExecutionFlow-Value-Entities-accessing' }

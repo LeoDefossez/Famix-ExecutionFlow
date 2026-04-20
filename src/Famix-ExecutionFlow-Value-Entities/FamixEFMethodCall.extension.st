@@ -9,7 +9,7 @@ FamixEFMethodCall >> arguments [
 	<derived>
 	<FMProperty: #arguments type: #FamixValueOfType opposite: #argumentInMethodCall>
 	<package: #'Famix-ExecutionFlow-Value-Entities'>
-	^ self attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #argumentInMethodCall: ]
+	^ self attributeAt: #arguments ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #argumentInMethodCall ]
 ]
 
 { #category : '*Famix-ExecutionFlow-Value-Entities-accessing' }

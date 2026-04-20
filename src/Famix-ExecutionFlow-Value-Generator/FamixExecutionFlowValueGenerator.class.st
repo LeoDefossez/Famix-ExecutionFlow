@@ -47,7 +47,7 @@ FamixExecutionFlowValueGenerator >> defineRelations [
 			 'The calls that use me as receiver.').
 	((methodCall property: #arguments) comment:
 		 'The arguments of the call.')
-	-* ((tOfType property: #argumentInMethodCall) comment:
+	*-* ((tOfType property: #argumentInMethodCall) comment:
 			 'The calls that use me as an argument.').
 	((methodCall property: #result) comment: 'The result of the call.')
 	*- ((tOfType property: #resultInMethodCall) comment:
