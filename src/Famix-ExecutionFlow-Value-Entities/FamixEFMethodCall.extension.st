@@ -1,25 +1,6 @@
 Extension { #name : 'FamixEFMethodCall' }
 
 { #category : '*Famix-ExecutionFlow-Value-Entities-accessing' }
-FamixEFMethodCall >> arguments [
-	"Relation named: #arguments type: #FamixValueOfType opposite: #argumentInMethodCall"
-
-	<generated>
-	<FMComment: 'The arguments of the call.'>
-	<derived>
-	<FMProperty: #arguments type: #FamixValueOfType opposite: #argumentInMethodCall>
-	<package: #'Famix-ExecutionFlow-Value-Entities'>
-	^ self attributeAt: #arguments ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #argumentInMethodCall ]
-]
-
-{ #category : '*Famix-ExecutionFlow-Value-Entities-accessing' }
-FamixEFMethodCall >> arguments: anObject [
-
-	<generated>
-	self arguments value: anObject
-]
-
-{ #category : '*Famix-ExecutionFlow-Value-Entities-accessing' }
 FamixEFMethodCall >> receiver [
 	"Relation named: #receiver type: #FamixValueOfType opposite: #receiverInMethodCall"
 

@@ -20,9 +20,11 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOn [
 { #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnArgument [
 
-	methodCall arguments: { (FamixValueOfPrimitiveType new
-			 value: 42;
-			 type: (FamixJavaPrimitiveType named: 'int')) }.
+	FamixEFArgument new
+		value: (FamixValueOfPrimitiveType new
+				 value: 42;
+				 type: (FamixJavaPrimitiveType named: 'int'));
+		methodCall: methodCall.
 
 	self
 		assert: self buildMooseName
@@ -33,12 +35,16 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnArgument [
 { #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnArgumentResult [
 
-	methodCall arguments: { (FamixValueOfPrimitiveType new
-			 value: 42;
-			 type: (FamixJavaPrimitiveType named: 'int')) }.
+	methodCall arguments:
+		{ (FamixEFArgument new value: (FamixValueOfPrimitiveType new
+				  value: 42;
+				  type: (FamixJavaPrimitiveType named: 'int'))) }.
+
 	methodCall result: (FamixValueOfPrimitiveType new
 			 value: 'meaning of life';
 			 type: (FamixJavaClass named: 'String')).
+
+
 
 	self
 		assert: self buildMooseName
@@ -63,9 +69,12 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverArgument [
 
 	methodCall receiver:
 		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
-	methodCall arguments: { (FamixValueOfPrimitiveType new
-			 value: 42;
-			 type: (FamixJavaPrimitiveType named: 'int')) }.
+
+	methodCall arguments: { (FamixEFArgument new
+			 value: (FamixValueOfPrimitiveType new
+					  value: 42;
+					  type: (FamixJavaPrimitiveType named: 'int'));
+			 methodCall: methodCall) }.
 
 	self
 		assert: self buildMooseName
@@ -78,9 +87,12 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverArgumentResult [
 
 	methodCall receiver:
 		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
-	methodCall arguments: { (FamixValueOfPrimitiveType new
-			 value: 42;
-			 type: (FamixJavaPrimitiveType named: 'int')) }.
+
+	methodCall arguments:
+		{ (FamixEFArgument new value: (FamixValueOfPrimitiveType new
+				  value: 42;
+				  type: (FamixJavaPrimitiveType named: 'int'))) }.
+
 	methodCall result: (FamixValueOfPrimitiveType new
 			 value: 'meaning of life';
 			 type: (FamixJavaClass named: 'String')).
@@ -109,16 +121,22 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverResult [
 
 { #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverTwoArgumentsResult [
+	"Receiver"
 
 	methodCall receiver:
 		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
+
+	"Arguments"
 	methodCall arguments: {
-			(FamixValueOfPrimitiveType new
-				 value: 42;
-				 type: (FamixJavaPrimitiveType named: 'int')).
-			(FamixValueOfPrimitiveType new
-				 value: true;
-				 type: (FamixJavaPrimitiveType named: 'boolean')) }.
+			(FamixEFArgument new value: (FamixValueOfPrimitiveType new
+					  value: 42;
+					  type: (FamixJavaPrimitiveType named: 'int'))).
+			(FamixEFArgument new value: (FamixValueOfPrimitiveType new
+					  value: true;
+					  type: (FamixJavaPrimitiveType named: 'boolean'))) }.
+
+
+	"Result"
 	methodCall result: (FamixValueOfPrimitiveType new
 			 value: 'meaning of life';
 			 type: (FamixJavaClass named: 'String')).

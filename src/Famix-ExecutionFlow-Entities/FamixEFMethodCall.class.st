@@ -8,6 +8,7 @@ This entity links a method from a Famix model to actual runtime values, capturin
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `arguments` | `FamixEFMethodCall` | `methodCall` | `FamixEFArgument` | The arguments of the call.|
 | `caller` | `FamixEFMethodCall` | `calls` | `FamixEFMethodCall` | The calling method.|
 | `calls` | `FamixEFMethodCall` | `caller` | `FamixEFMethodCall` | Methods called by me.|
 | `method` | `FamixEFMethodCall` | `methodCalls` | `FamixTMethod` | The called method.|
@@ -35,7 +36,8 @@ Class {
 		'#nextSibling => FMOne type: #FamixEFMethodCall opposite: #previousSibling',
 		'#previousSibling => FMOne type: #FamixEFMethodCall opposite: #nextSibling',
 		'#caller => FMOne type: #FamixEFMethodCall opposite: #calls',
-		'#calls => FMMany type: #FamixEFMethodCall opposite: #caller'
+		'#calls => FMMany type: #FamixEFMethodCall opposite: #caller',
+		'#arguments => FMMany type: #FamixEFArgument opposite: #methodCall'
 	],
 	#category : 'Famix-ExecutionFlow-Entities-Entities',
 	#package : 'Famix-ExecutionFlow-Entities',
@@ -60,9 +62,32 @@ FamixEFMethodCall class >> isAbstract [
 ]
 
 { #category : 'adding' }
+FamixEFMethodCall >> addArgument: anObject [
+	<generated>
+	^ self arguments add: anObject
+]
+
+{ #category : 'adding' }
 FamixEFMethodCall >> addCall: anObject [
 	<generated>
 	^ self calls add: anObject
+]
+
+{ #category : 'accessing' }
+FamixEFMethodCall >> arguments [
+	"Relation named: #arguments type: #FamixEFArgument opposite: #methodCall"
+
+	<generated>
+	<FMComment: 'The arguments of the call.'>
+	<derived>
+	^ arguments
+]
+
+{ #category : 'accessing' }
+FamixEFMethodCall >> arguments: anObject [
+
+	<generated>
+	arguments value: anObject
 ]
 
 { #category : 'accessing' }
@@ -120,6 +145,7 @@ FamixEFMethodCall >> method [
 	<generated>
 	<FMComment: 'The called method.'>
 	<FMProperty: #method type: #FamixTMethod opposite: #methodCalls>
+	<package: #'Famix-ExecutionFlow-Value-Entities'>
 	^ self attributeAt: #method ifAbsent: [ nil ]
 ]
 
