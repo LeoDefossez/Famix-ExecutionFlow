@@ -36,9 +36,11 @@ FamixExecutionFlowValueGenerator class >> submetamodels [
 FamixExecutionFlowValueGenerator >> defineClasses [
 
 	methodCall := self remoteEntity: #MethodCall withPrefix: #FamixEF.
-	argument := self remoteEntity: #Argument withPrefix: #FamixEF.
-	
 
+	argument := builder
+		            newClassNamed: #Argument
+		            comment: 'An argument of a method call.
+This entity is reified due to the fact that an argument can appear multiple times in the same method call.'
 ]
 
 { #category : 'definition' }
@@ -50,9 +52,15 @@ FamixExecutionFlowValueGenerator >> defineRelations [
 	*- ((tOfType property: #receiverInMethodCall) comment:
 			 'The calls that use me as receiver.').
 
-	((argument property: #value) comment: 'The arguments of the call.')
-	*- ((tOfType property: #argumentInMethodCall) comment:
-			 'The calls that use me as an argument.').
+	((methodCall property: #arguments) comment:
+		 'The arguments of the call.')
+	-* ((argument property: #methodCall) comment:
+			 'The call that use me as an argument.').
+
+	((argument property: #value) comment:
+		 'The value of an argument in a method call.')
+	*- ((tOfType property: #argumentInMethodCalls) comment:
+			 'The call arguments that use me as a value.').
 
 	((methodCall property: #result) comment: 'The result of the call.')
 	*- ((tOfType property: #resultInMethodCall) comment:

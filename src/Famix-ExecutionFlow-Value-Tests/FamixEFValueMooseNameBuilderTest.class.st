@@ -20,11 +20,10 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOn [
 { #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnArgument [
 
-	FamixEFArgument new
-		value: (FamixValueOfPrimitiveType new
-				 value: 42;
-				 type: (FamixJavaPrimitiveType named: 'int'));
-		methodCall: methodCall.
+	methodCall arguments:
+		{ (FamixEFVArgument new value: (FamixValueOfPrimitiveType new
+				  value: 42;
+				  type: (FamixJavaPrimitiveType named: 'int'))) }.
 
 	self
 		assert: self buildMooseName
@@ -36,7 +35,7 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnArgument [
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnArgumentResult [
 
 	methodCall arguments:
-		{ (FamixEFArgument new value: (FamixValueOfPrimitiveType new
+		{ (FamixEFVArgument new value: (FamixValueOfPrimitiveType new
 				  value: 42;
 				  type: (FamixJavaPrimitiveType named: 'int'))) }.
 
@@ -70,11 +69,10 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverArgument [
 	methodCall receiver:
 		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
 
-	methodCall arguments: { (FamixEFArgument new
-			 value: (FamixValueOfPrimitiveType new
-					  value: 42;
-					  type: (FamixJavaPrimitiveType named: 'int'));
-			 methodCall: methodCall) }.
+	methodCall arguments:
+		{ (FamixEFVArgument new value: (FamixValueOfPrimitiveType new
+				  value: 42;
+				  type: (FamixJavaPrimitiveType named: 'int'))) }.
 
 	self
 		assert: self buildMooseName
@@ -89,7 +87,7 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverArgumentResult [
 		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
 
 	methodCall arguments:
-		{ (FamixEFArgument new value: (FamixValueOfPrimitiveType new
+		{ (FamixEFVArgument new value: (FamixValueOfPrimitiveType new
 				  value: 42;
 				  type: (FamixJavaPrimitiveType named: 'int'))) }.
 
@@ -128,10 +126,10 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverTwoArgumentsResult [
 
 	"Arguments"
 	methodCall arguments: {
-			(FamixEFArgument new value: (FamixValueOfPrimitiveType new
+			(FamixEFVArgument new value: (FamixValueOfPrimitiveType new
 					  value: 42;
 					  type: (FamixJavaPrimitiveType named: 'int'))).
-			(FamixEFArgument new value: (FamixValueOfPrimitiveType new
+			(FamixEFVArgument new value: (FamixValueOfPrimitiveType new
 					  value: true;
 					  type: (FamixJavaPrimitiveType named: 'boolean'))) }.
 

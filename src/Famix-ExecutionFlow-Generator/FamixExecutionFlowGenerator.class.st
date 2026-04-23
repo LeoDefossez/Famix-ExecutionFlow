@@ -49,14 +49,7 @@ This entity links a method from a Famix model to actual runtime values, capturin
 		                       newClassNamed: #IndirectMethodCall
 		                       comment:
 		                       'A call executed by an unknown caller, so it can be a child of an indirect parent (ancestor) call.')
-		                      withTesting.
-		
-	
-	argument := builder
-		            newClassNamed: #Argument
-		            comment:
-			            'An argument of a method call in the context of a dynamic call graph.
-This entity is reified due to the fact that, an argument can appear in multiple method calls, and multiple times in the same method call.'
+		                      withTesting
 ]
 
 { #category : 'definition' }
@@ -86,11 +79,6 @@ FamixExecutionFlowGenerator >> defineRelations [
 			 'The previous sibling/call in the same method context.').
 	((methodCall property: #caller) comment: 'The calling method.')
 	*- ((methodCall property: #calls) comment: 'Methods called by me.').
-
-	((methodCall property: #arguments) comment:
-		 'The arguments of the call.')
-	-* ((argument property: #methodCall) comment:
-			 'The calls that use me as an argument.').
 
 	"Relations to Famix"
 	((methodCall property: #method) comment: 'The called method.')

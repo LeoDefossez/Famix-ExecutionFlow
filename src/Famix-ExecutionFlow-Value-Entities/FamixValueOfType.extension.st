@@ -2,12 +2,12 @@ Extension { #name : 'FamixValueOfType' }
 
 { #category : '*Famix-ExecutionFlow-Value-Entities-accessing' }
 FamixValueOfType >> argumentInMethodCall [
-	"Relation named: #argumentInMethodCall type: #FamixEFArgument opposite: #value"
+	"Relation named: #argumentInMethodCall type: #FamixEFVArgument opposite: #value"
 
 	<generated>
 	<FMComment: 'The calls that use me as an argument.'>
 	<derived>
-	<FMProperty: #argumentInMethodCall type: #FamixEFArgument opposite: #value>
+	<FMProperty: #argumentInMethodCall type: #FamixEFVArgument opposite: #value>
 	<package: #'Famix-ExecutionFlow-Value-Entities'>
 	^ self attributeAt: #argumentInMethodCall ifAbsentPut: [ FMMultivalueLink on: self opposite: #value: ]
 ]

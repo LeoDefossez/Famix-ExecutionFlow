@@ -1,8 +1,8 @@
 Class {
 	#name : 'FamixEFVModel',
 	#superclass : 'MooseModel',
-	#traits : 'FamixEFTEntityCreator + FamixValueTEntityCreator',
-	#classTraits : 'FamixEFTEntityCreator classTrait + FamixValueTEntityCreator classTrait',
+	#traits : 'FamixEFTEntityCreator + FamixEFVTEntityCreator + FamixValueTEntityCreator',
+	#classTraits : 'FamixEFTEntityCreator classTrait + FamixEFVTEntityCreator classTrait + FamixValueTEntityCreator classTrait',
 	#category : 'Famix-ExecutionFlow-Value-Entities-Model',
 	#package : 'Famix-ExecutionFlow-Value-Entities',
 	#tag : 'Model'
